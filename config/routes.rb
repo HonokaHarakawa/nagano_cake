@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   }
   
   devise_for :customers, controllers: {
-        sessions: 'customers/sessions'
+        sessions: 'customers/sessions',
+        registrations: 'customers/registrations'
   }
+  
   get 'customers/page' => 'customers#show'
   root to: "homes#top"
   get 'about' => 'homes#about'
