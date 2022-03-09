@@ -1,6 +1,6 @@
 class Admin::ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.all.page(params[:page]).per(10)
   end
   
   def show
@@ -28,6 +28,7 @@ class Admin::ItemsController < ApplicationController
   
   def update
     @item = Item.find(params[:id])
+    @item.genre_id = params[:genre_id][:name]
     @item.update(item_params)
     redirect_to admin_item_path(@item)
   end

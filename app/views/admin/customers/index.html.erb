@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-auto mt-4 mb-4">
+    <div class="col-lg-auto mt-4 mb-4 bg-light">
       <h2>会員一覧</h2>
     </div>
   </div>
@@ -31,5 +31,10 @@
         </tbody>
       </table>
     </div>  
-  </div>    
+  </div>  
+  <div class="row justify-content-md-center">
+    <div class="col-lg-auto">
+      <%= paginate @customers %>
+    </div>
+  </div>
 </div>      

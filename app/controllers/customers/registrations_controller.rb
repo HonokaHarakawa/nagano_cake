@@ -12,11 +12,14 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    @customer = Customer.new
+    @customer = Customer.new(customer_params)
     @customer.save
-    redirect_to customers_page_path(@customer)and return
+    redirect_to customers_page_path(@customer) and return
   end
+  
+  def customer_params
+    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)
+  end  
 
   # GET /resource/edit
   # def edit

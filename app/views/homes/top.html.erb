@@ -1,1 +1,4 @@
-<h2>トップページ</h2>
+<p>ジャンル検索</p>
+  <% @genres.each do |genre| %>
+    <%= genre.name %>
+  <% end %>

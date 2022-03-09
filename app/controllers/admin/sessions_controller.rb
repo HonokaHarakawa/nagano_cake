@@ -3,7 +3,6 @@
 class Admin::SessionsController < Devise::SessionsController
   #before_action :configure_sign_in_params, only: [:create]
 
-
   # GET /resource/sign_in
   # def new
   #   super
@@ -11,7 +10,8 @@ class Admin::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    redirect_to admin_items_path
+  #   super
+     redirect_to admin_items_path
   end
 
   # DELETE /resource/sign_out
