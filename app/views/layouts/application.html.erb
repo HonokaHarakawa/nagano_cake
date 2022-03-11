@@ -14,44 +14,39 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <div class="navbar-brand pt-2 pb-2 pl-3 pr-3">
-          <a class="navbar-brand" href="#">Logo</a>
+          <a class="navbar-brand" href="/">Logo</a>
         </div>
         <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
-            <% if admin_signed_in? %>
+            <% if customer_signed_in? %>
               <li class="nav-item">
-                <%= link_to admin_items_path do %>
+                <%= link_to customers_page_path(current_customer) do %>
+                  <button class="btn btn-outline-secondary">マイページ</button>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to items_path do %>
                   <button class="btn btn-outline-secondary">商品一覧</button>
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to admin_customers_path do %>
-                  <button class="btn btn-outline-secondary">会員一覧</button>
+                <%= link_to cart_items_path(current_customer) do %>
+                  <button class="btn btn-outline-secondary">カート</button>
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to admin_root_path do %>
-                  <button class="btn btn-outline-secondary">注文履歴一覧</button>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to admin_genres_path do %>
-                  <button class="btn btn-outline-secondary">ジャンル一覧</button>
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to destroy_admin_session_path, method: :delete do %>
+                <%= link_to destroy_customer_session_path, method: :delete do %>
                   <button class="btn btn-outline-secondary">ログアウト</button>
                 <% end %>
               </li>
-            <% else%>
+            <% else %>  
               <li class="nav-item">
                 <%= link_to about_path do %>
                   <button class="btn btn-outline-secondary">About</button>
                 <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to  do %>
+                <%= link_to items_path do %>
                   <button class="btn btn-outline-secondary">商品一覧</button>
                 <% end %>
               </li>
@@ -65,7 +60,7 @@
                   <button class="btn btn-outline-secondary">ログイン</button>
                 <% end %>
               </li>
-            <% end %>
+            <% end %>  
           </ul>
         </div>
       </div>
@@ -74,3 +69,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
+

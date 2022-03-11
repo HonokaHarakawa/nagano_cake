@@ -3,23 +3,21 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  
   # GET /resource/sign_up
   def new
-    super
     @customer = Customer.new
   end
 
   # POST /resource
   def create
-    @customer = Customer.new(customer_params)
-    @customer.save
-    redirect_to customers_page_path(@customer) and return
+    @customer = Customer.new(sign_up_params)
+    super
   end
   
-  def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)
-  end  
+  def after_sign_up_path_for(resource)
+    customers_page_path(resource)
+  end
 
   # GET /resource/edit
   # def edit

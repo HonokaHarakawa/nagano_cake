@@ -1,4 +1,14 @@
-<p>ジャンル検索</p>
-  <% @genres.each do |genre| %>
-    <%= genre.name %>
-  <% end %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col col-lg-2 border border-dark">
+      <p class="border-bottom border-dark text-center">ジャンル検索</p>
+        <% @genres.each do |genre| %>
+          <%= genre.name %><br>
+        <% end %>
+    </div>
+    
+  </div>      
+  <div class="row">
+    
+  </div>
+</div>

@@ -16,10 +16,17 @@ Rails.application.routes.draw do
         sessions: 'customers/sessions',
         registrations: 'customers/registrations'
   }
-  resources :customers, only: :update
   get 'customers/page' => 'customers#show'
   get 'customers/page/edit' => 'customers#edit'
+  patch 'customers/page' => 'customers#update'
+  get 'customers/page/confirm' => 'customers#confirm'
+  patch 'customers/withdraw' => 'customers#withdraw'
   root to: "homes#top"
   get 'about' => 'homes#about'
-  
+  resources :items, only: [:index, :show]
+  resources :cart_items
+  resources :orders, only: [:index, :new, :show, :create]
+  get 'orders/thanks' => 'orders#thanks'
+  post 'orders/confirm' => 'orders#confirm'
+  resources :addresses
 end
