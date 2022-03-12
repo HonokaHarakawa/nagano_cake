@@ -1,0 +1,10 @@
+<h2>注文情報入力</h2>
+
+<%= form_with model: @order, url: orders_confirm_path do |f| %>
+<h4>支払方法</h4>
+
+
+<h4>お届け先</h4>
+
+<%= f.submit "確認画面へ進む", class:"btn btn-primary" %>
+<% end %>
