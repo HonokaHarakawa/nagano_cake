@@ -24,11 +24,16 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get 'about' => 'homes#about'
   resources :items, only: [:index, :show]
-  resources :cart_items
-  delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
-  resources :orders, only: [:index, :new, :show]
+  resources :cart_items do
+    collection do
+      delete 'destroy_all'
+    end
+  end  
+  get 'orders' => 'orders#index'
+  get 'orders/new' => 'orders#new'
   get 'orders/thanks' => 'orders#thanks'
   post 'orders/confirm' => 'orders#confirm'
   post 'orders/new/:id' => 'orders#creste'
   resources :addresses
+  
 end
