@@ -31,7 +31,12 @@
             <td>メールアドレス</td><td><%= @customer.email %></td>
           </tr>
           <tr>
-            <td>会員ステータス</td><td><%= @customer.is_active %></td>
+            <td>会員ステータス</td>
+            <% if @customer.is_active == true %>
+            <td><p class="text-success">有効</p></td>
+            <% else %>
+            <td><p class="text-secondary">退会</p></td>
+            <% end %>
           </tr>
         </tbody>
       </table>
@@ -43,7 +48,7 @@
       <%= link_to "編集する", edit_admin_customer_path(@customer),  class: "btn btn-success" %>
     </div>
     <div class="col-auto ml-3">
-      <%= link_to "注文履歴一覧を見る", root_path, class: "btn btn-primary" %>
+      <%= link_to "注文履歴一覧を見る", admin_root_path, class: "btn btn-primary" %>
     </div>
   </div>    
 </div>      

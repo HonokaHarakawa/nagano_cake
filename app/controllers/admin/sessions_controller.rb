@@ -2,17 +2,18 @@
 
 class Admin::SessionsController < Devise::SessionsController
   #before_action :configure_sign_in_params, only: [:create]
-
+  before_action :authenticate_admin!
   # GET /resource/sign_in
   # def new
   #   super
   # end
 
   # POST /resource/sign_in
-  def create
+  #def create
+    #redirect_to admin_items_path
+ 
   #   super
-     redirect_to admin_items_path
-  end
+  #end
 
   # DELETE /resource/sign_out
   # def destroy
@@ -25,4 +26,14 @@ class Admin::SessionsController < Devise::SessionsController
   #def configure_sign_in_params
     #devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
   #end
+  def redirect_root
+    redirect_to new_admin_session_path unless admin_signed_in?
+  end
+  def after_sign_in_path_for(resource)
+    admin_items_path
+  end
+
+  def after_sign_out_path_for(resource)
+    new_admin_session_path
+  end
 end

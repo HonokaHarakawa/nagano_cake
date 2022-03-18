@@ -9,18 +9,12 @@ class OrdersController < ApplicationController
   end 
   
   def confirm
-    @order = Order.new(order_params)
-    if params[:order][:select_address] == "0"
-      @order.postal_code = current_customer.postal_code
-      @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
-      @order.save
-    elsif select_address == "1"
-      @order = params[:order][:address_id]
-      @order.save
-    else  
-      @order.save
-    end    
+       @order = Order.new(order_params)
+       @order.customer = current_customer
+    if params[:order][:select_address] == "1"
+       @orders = Address.find(params[:order][:address_id])
+    end  
+       @order.save
   end 
   
   def thanks
