@@ -10,7 +10,7 @@ class Customers::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
    def create
      @customer = current_customer
-     redirect_to customers_page_path(@customer)
+     redirect_to customers_page_path
    end
 
   # DELETE /resource/sign_out
@@ -24,4 +24,5 @@ class Customers::SessionsController < Devise::SessionsController
    def configure_sign_in_params
      devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
    end
+   
 end

@@ -1,10 +1,31 @@
-<%= attachment_image_tag @item, :image, :fill, 300, 200 %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col col-md-2 border border-dark">
+      <p class="border-bottom border-dark text-center">ジャンル検索</p>
+        <% @genres.each do |genre| %>
+            <p class="text-dark"><%= genre.name %></p>
+        <% end %>
+    </div>
+    <div class="col col-lg-5 text-center">
+      <%= attachment_image_tag @item, :image, :fill, 300, 200 %>
+    </div>
+    <div class="col-md-4">
+      <h2><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <h2>¥<%= @item.with_tax_price.to_s(:dalimited) %>(税込)</h2>
+  </div>
+     <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+      <%= f.hidden_field :item_id, :value => @item.id %>
 
-<h2><%= @item.name %></h2>
-<p><%= @item.introduction %></p>
-<h2>¥<%= @item.with_tax_price.to_s(:dalimited) %>(税込)</h2>
-<%= form_with model: @cart_item, url: cart_items_path do |f| %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.select :amount, *[1..10] %>
-  <%= f.submit "カートに入れる", class:"btn btn-success" %>
-<% end %>
+  <div class="row text-center">
+    <div class="col-md-5 offset-md-7">
+          <% if @item.is_active == true %>
+            <%= f.select :amount, *[1..10] %>
+            <%= f.submit "カートに入れる", class:"btn btn-success" %>
+          <% else %>
+            <h5 class="text-danger">売り切れ</h5>
+          <% end %>
+    </div>        
+  </div>
+       <% end %>
+</div>

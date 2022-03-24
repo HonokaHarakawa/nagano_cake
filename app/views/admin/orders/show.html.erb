@@ -9,37 +9,54 @@
     <div class="col-10">
       <table class="table table-borderless">
         <tr>
-          <td><b>購入者</b></td>
+          <td><b>購入者</b></td><td><%= @order.customer.first_name + @order.customer.last_name %></td>
         </tr>
         <tr>
-          <td><b>注文日</b></td>
+          <td><b>注文日</b></td><td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
           <td><b>配送先</b></td>
+          <td>〒<%= @order.postal_code %>　<%= @order.address %><br><%= @order.name %></td>
         </tr>
         <tr>
           <td><b>支払方法</b></td>
+          <td>
+            <% if Order.payment_methods.key(0) %>
+             <%= Order.payment_methods_i18n[:credit_card] %>
+            <% else %>
+             <%= Order.payment_methods_i18n[:transfer] %>
+            <% end %>
+          </td>
         </tr>
         <tr>
-          <td><b>注文ステータス</b></td><td></td>         
- 
+          <td><b>注文ステータス</b></td>
+          <td>
+            <%= form_with model: @order, url: admin_order_path(@order) do |f| %>
+              <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+            <%= f.submit "更新", class:"btn btn-success" %>
+            <% end %>
+          </td>         
         </tr>
       </table>
     </div>  
   </div>    
+          
   
   <div class="row justify-content-left">
     <div class="col-7">
       <table class="table">
         <thead>
           <tr>
-            <th>商品名</th><th>単価（税込）</th><th>数量</th><th>小計</th><th>制作ステータス</th>
+            <th>商品名</th><th>単価（税込）</th><th>数量</th><th>小計</th>
           </tr>
         </thead>
         <tbody>
+          <% @order.order_details.each do |order_detail| %>
           <tr>
-            <td></td>
+            <td><%= order_detail.item.name %></td><td><%= order_detail.item.with_tax_price %></td><td><%= order_detail.amount %></td>
+            <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
           </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
@@ -47,13 +64,13 @@
     <div class="col-5">
       <table class="table table-borderless">
         <tr>
-          <td><b>商品合計</b></td>
+          <td><b>商品合計</b></td><td><%= @order.billing_amount - @order.postage %>円</td>
         </tr>
         <tr>
-          <td><b>送料</b></td>
+          <td><b>送料</b></td><td><%= @order.postage %>円</td>
         </tr>
         <tr>
-          <td><b>請求金額合計</b></td>
+          <td><b>請求金額合計</b></td><td><%= @order.billing_amount %>円</td>
         </tr>
       </table>
     </div>

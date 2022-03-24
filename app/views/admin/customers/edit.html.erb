@@ -6,30 +6,86 @@
   </div>
   
       <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+  <div class="row mb-3">     
+    <div class="col-md-3">
+        <%= f.label :会員 %>
+    </div>
+    <div class="col-md-auto offsett-md-3">
+        <%= @customer.id %>
+    </div>
+  </div> 
+  <div class="row mb-3">
+    <div class="col-md-3">
         <%= f.label :氏名 %>
-        <%= f.text_field :first_name %><%= f.text_field :last_name %><br>
-        
+    </div>
+    <div class="col-md-6">
+        <%= f.text_field :first_name %>
+        <%= f.text_field :last_name %>
+    </div>
+  </div>      
+  
+  <div class="row mb-3">
+    <div class="col-md-3">
         <%= f.label :フリガナ %>
-        <%= f.text_field :first_name_kana %><%= f.text_field :last_name_kana %><br>
-        
+    </div>
+    <div class="col-md-6">
+        <%= f.text_field :first_name_kana %>
+        <%= f.text_field :last_name_kana %>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-md-3">
         <%= f.label :郵便番号 %>
-        <%= f.text_field :postal_code %><br>
-        
+    </div>
+    <div class="col-md-3">
+        <%= f.text_field :postal_code %>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-md-3">      
         <%= f.label :住所 %>
-        <%= f.text_field :address %><br>
-        
+    </div>
+    <div class="col-md-3">
+        <%= f.text_field :address %>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-md-3">      
         <%= f.label :電話番号 %>
-        <%= f.text_field :telephone_number %><br>
-        
+    </div>
+    <div class="col-md-3">
+        <%= f.text_field :telephone_number %>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-md-3">      
         <%= f.label :メールアドレス %>
-        <%= f.text_field :email %><br>
-        
+    </div>
+    <div class="col-md-3">
+        <%= f.text_field :email %>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-md-3">      
         <%= f.label :会員ステータス %>
-        <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+    </div>
+    <div class="col-md-3">
         <%= f.radio_button :is_active, "有効",checked: true %>
+        <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :is_active, :false %>
         <%= f.label :is_active, "退会", {value: :false, style: "display: inline-block;"} %>
-        <%= f.radio_button :is_active, :false %><br>
-        
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-auto offset-md-3">      
         <%= f.submit "変更を保存", class: "btn btn-success" %>
+    </div>
+  </div>
       <% end %>
 </div>      

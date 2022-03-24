@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     resources :genres
     resources :items
     resources :customers
-    get "orders/show" => "orders#show"
+    resources :orders, only: [:show, :update]
+    resources :order_details, only: [:update]
   end
   
   devise_for :admin, controllers: {
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   }
   get 'customers/page' => 'customers#show'
   get 'customers/page/edit' => 'customers#edit'
-  patch 'customers/page' => 'customers#update'
+  patch 'customers/page/:id' => 'customers#update'
   get 'customers/page/confirm' => 'customers#confirm'
   patch 'customers/withdraw' => 'customers#withdraw'
   root to: "homes#top"
@@ -27,13 +28,13 @@ Rails.application.routes.draw do
   resources :cart_items do
     collection do
       delete 'destroy_all'
+
     end
-  end  
-  get 'orders' => 'orders#index'
-  get 'orders/new' => 'orders#new'
+  end   
   get 'orders/thanks' => 'orders#thanks'
+  resources :orders, only: [:index, :new, :show]
+  post 'orders' => 'orders#create'
   post 'orders/confirm' => 'orders#confirm'
-  post 'orders/new/:id' => 'orders#creste'
   resources :addresses
-  
+
 end

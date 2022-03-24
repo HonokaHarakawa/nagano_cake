@@ -22,7 +22,7 @@
             <td><%= customer.id %></td>
             <td>
               <%= link_to admin_customer_path(customer) do %>
-                <%= customer.first_name %><%= customer.last_name %>
+                <p class="text-dark"><%= customer.first_name + customer.last_name%></p>
               <% end %>  
             </td>
             <td><%= customer.email %></td>
