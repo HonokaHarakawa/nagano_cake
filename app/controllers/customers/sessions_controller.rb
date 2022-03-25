@@ -10,7 +10,7 @@ class Customers::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
    def create
      @customer = current_customer
-     redirect_to customers_page_path
+     redirect_to root_path
    end
 
   # DELETE /resource/sign_out
@@ -25,4 +25,14 @@ class Customers::SessionsController < Devise::SessionsController
      devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
    end
    
+   def reject_user
+    @customer = Customer.find_by(name: params[:customer][:name])
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_active == true)
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to user_path
+      else
+      end
+    end
+   end
 end

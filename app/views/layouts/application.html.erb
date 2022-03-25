@@ -20,7 +20,7 @@
           <ul class="navbar-nav">
             <% if customer_signed_in? %>
               <li class="nav-item mr-4">
-                <%= link_to customers_page_path(current_customer) do %>
+                <%= link_to customers_page_path do %>
                   <button class="btn btn-outline-secondary">マイページ</button>
                 <% end %>
               </li>
@@ -30,7 +30,7 @@
                 <% end %>
               </li>
               <li class="nav-item mr-4">
-                <%= link_to cart_items_path(current_customer) do %>
+                <%= link_to cart_items_path do %>
                   <button class="btn btn-outline-secondary">カート</button>
                 <% end %>
               </li>
